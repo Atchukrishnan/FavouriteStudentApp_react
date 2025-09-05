@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes ,Route } from "react-router-dom";
-import Addstudents from "./Addstudents";
-import FavouriteList from "./FavouriteList";
-import StudentProvider from "../StudentContext";
+import Addstudents from "./components/Addstudents";
+import FavouriteList from "./components/FavouriteList";
+import StudentProvider from "./components/StudentContext";
 function App(){
     
     return(<>
