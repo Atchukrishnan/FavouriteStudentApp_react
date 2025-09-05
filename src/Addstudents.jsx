@@ -1,22 +1,48 @@
-function Addstudents(){
-    var listStudents = [{id:1,name:"Atchaya"},{id:2,name:"Mathu"},{id:3,name:"Udhaya"},{id:4,name:"Latha"},{id:5,name:"Radha"},{id:6,name:"Suriya"}]
-    return(
+import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { StudentsContext } from "./StudentContext"
+
+function Addstudents() {
+    const { listStudents, favourite, setfavourite } = useContext(StudentsContext)
+
+    function handleAdd(student) {
+        setfavourite(prev => {
+            if (prev.some(f => f.id === student.id)) return prev;
+            return [...prev, student]
+        })
+
+    }
+    return (
         <>
-        <div className="heading"><p>List of Students</p>
-        <p>Favourite Students</p></div>
-        <ul>
-        </ul>
-            {
-                listStudents.map(function(items){
-                    return <li className="studentlists">
-                    <span>{items.id}.{items.name}</span>
-                    <button>Add to favourites</button>
-            </li>
-                })
-            }
-            
-        
+            <div className="heading">
+                <Link className="heading_link" to={"/"}>
+                    <p>List of Students</p>
+                </Link>
+                <Link className="heading_link" to={"/favourite"}>
+                    <p>Favourite Students</p>
+                </Link>
+            </div>
+
+            <ul>
+                {listStudents.map(student => {
+                    // check if this student is already in favourites
+                    const isFavourite = favourite.some(fav => fav.id === student.id);
+
+                    return (
+                        <li key={student.id} className="studentlists">
+                            <span>{student.id}. {student.name}</span>
+                            <button className="add"
+                                onClick={() => handleAdd(student)}
+                                disabled={isFavourite}
+                            >
+                                Add to favourites
+                            </button>
+                        </li>
+                    );
+                })}
+            </ul>
         </>
-    )
+    );
 }
+
 export default Addstudents
