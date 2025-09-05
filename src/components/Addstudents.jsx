@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useContext } from "react"
-import { StudentsContext } from "./StudentContext"
+import { StudentsContext } from "../StudentContext"
 
 function Addstudents() {
     const { listStudents, favourite, setfavourite } = useContext(StudentsContext)
